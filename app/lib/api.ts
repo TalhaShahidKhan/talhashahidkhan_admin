@@ -57,3 +57,34 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
 
   return response.json();
 }
+
+export async function uploadFile(endpoint: string, file: File) {
+  const token = getAuthToken();
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const headers = new Headers();
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  if (response.status === 401) {
+    clearAuthToken();
+    if (typeof window !== "undefined" && window.location.pathname !== "/login") {
+      window.location.href = "/login";
+    }
+  }
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new Error(errorBody.message || `Request failed with status ${response.status}`);
+  }
+
+  return response.json();
+}

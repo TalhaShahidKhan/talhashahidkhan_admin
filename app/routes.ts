@@ -8,6 +8,10 @@ export default [
     route("projects", "routes/projects.tsx"),
     route("service-requests", "routes/service-requests.tsx"),
     route("contacts", "routes/contacts.tsx"),
+    route("media", "routes/media.tsx"),
+    route("posts", "routes/posts.tsx"),
+    route("posts/new", "routes/posts-new.tsx"),
+    route("projects/new", "routes/projects-new.tsx"),
     route("password-change", "routes/password-change.tsx"),
   ])
 ] satisfies RouteConfig;

@@ -31,8 +31,10 @@ export default function AdminLayout() {
         <nav className="flex-1 p-4 space-y-2">
           <Link to="/" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Dashboard</Link>
           <Link to="/projects" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Projects</Link>
+          <Link to="/posts" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Blog Posts</Link>
           <Link to="/service-requests" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Service Requests</Link>
           <Link to="/contacts" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Contacts</Link>
+          <Link to="/media" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Media Library</Link>
           <Link to="/password-change" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">Change Password</Link>
         </nav>
         <div className="p-4 border-t border-white/10">

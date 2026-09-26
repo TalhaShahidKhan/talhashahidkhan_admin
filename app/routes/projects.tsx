@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { fetchApi } from "../lib/api";
 
 export default function Projects() {
@@ -12,12 +13,17 @@ export default function Projects() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-semibold text-white tracking-tight">Projects</h2>
+          <h2 className="text-2xl font-semibold text-white tracking-tight">
+            Projects
+          </h2>
           <p className="text-slate-400 mt-1">Manage your portfolio projects.</p>
         </div>
-        <button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-medium px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+        <Link
+          to="/projects/new"
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-medium px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+        >
           + New Project
-        </button>
+        </Link>
       </div>
 
       <div className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-md overflow-hidden">
@@ -26,14 +32,21 @@ export default function Projects() {
             <tr>
               <th className="px-6 py-4 font-medium text-slate-200">Name</th>
               <th className="px-6 py-4 font-medium text-slate-200">Tags</th>
-              <th className="px-6 py-4 font-medium text-slate-200">Date Added</th>
-              <th className="px-6 py-4 font-medium text-slate-200 text-right">Actions</th>
+              <th className="px-6 py-4 font-medium text-slate-200">
+                Date Added
+              </th>
+              <th className="px-6 py-4 font-medium text-slate-200 text-right">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
             {projects.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-slate-500">
+                <td
+                  colSpan={4}
+                  className="px-6 py-8 text-center text-slate-500"
+                >
                   No projects found.
                 </td>
               </tr>
@@ -42,10 +55,16 @@ export default function Projects() {
                 <tr key={p.id} className="hover:bg-white/5 transition-colors">
                   <td className="px-6 py-4 font-medium text-white">{p.name}</td>
                   <td className="px-6 py-4">{p.tags?.join(", ")}</td>
-                  <td className="px-6 py-4">{new Date(p.createdAt).toLocaleDateString()}</td>
+                  <td className="px-6 py-4">
+                    {new Date(p.createdAt).toLocaleDateString()}
+                  </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="text-blue-400 hover:text-blue-300 mr-3">Edit</button>
-                    <button className="text-red-400 hover:text-red-300">Delete</button>
+                    <button className="text-blue-400 hover:text-blue-300 mr-3">
+                      Edit
+                    </button>
+                    <button className="text-red-400 hover:text-red-300">
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))
