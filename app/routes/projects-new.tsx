@@ -17,6 +17,13 @@ export default function ProjectsNew() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     setUploading(true);
@@ -79,9 +86,10 @@ export default function ProjectsNew() {
           <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
           <input
             type="text"
+            name="name"
             required
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={handleChange}
             className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           />
         </div>
@@ -89,10 +97,11 @@ export default function ProjectsNew() {
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-1">Description</label>
           <textarea
+            name="description"
             required
             rows={4}
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            onChange={handleChange}
             className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           />
         </div>
@@ -102,8 +111,9 @@ export default function ProjectsNew() {
             <label className="block text-sm font-medium text-slate-300 mb-1">Live Link</label>
             <input
               type="text"
+              name="liveLink"
               value={formData.liveLink}
-              onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })}
+              onChange={handleChange}
               className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />
           </div>
@@ -111,8 +121,9 @@ export default function ProjectsNew() {
             <label className="block text-sm font-medium text-slate-300 mb-1">GitHub Repository</label>
             <input
               type="text"
+              name="githubRepository"
               value={formData.githubRepository}
-              onChange={(e) => setFormData({ ...formData, githubRepository: e.target.value })}
+              onChange={handleChange}
               className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />
           </div>
@@ -123,8 +134,9 @@ export default function ProjectsNew() {
             <label className="block text-sm font-medium text-slate-300 mb-1">Tags (comma separated)</label>
             <input
               type="text"
+              name="tags"
               value={formData.tags}
-              onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+              onChange={handleChange}
               placeholder="React, Nextjs, Cloud"
               className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />
@@ -133,8 +145,9 @@ export default function ProjectsNew() {
             <label className="block text-sm font-medium text-slate-300 mb-1">Tech Stack (comma separated)</label>
             <input
               type="text"
+              name="techStack"
               value={formData.techStack}
-              onChange={(e) => setFormData({ ...formData, techStack: e.target.value })}
+              onChange={handleChange}
               placeholder="PostgreSQL, Redis, NestJS"
               className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />

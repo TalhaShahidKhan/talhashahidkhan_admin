@@ -15,15 +15,19 @@ export default function PostsNew() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     setUploading(true);
     try {
       const data = await uploadFile("/upload", e.target.files[0]);
-      setFormData((prev) => ({
-        ...prev,
-        imageUrl: data.url || data.secure_url,
-      }));
+      setFormData((prev) => ({ ...prev, imageUrl: data.url || data.secure_url }));
     } catch (err: any) {
       alert("Failed to upload image: " + err.message);
     } finally {
@@ -76,11 +80,10 @@ export default function PostsNew() {
             </label>
             <input
               type="text"
+              name="title"
               required
               value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
+              onChange={handleChange}
               className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />
           </div>
@@ -90,11 +93,10 @@ export default function PostsNew() {
             </label>
             <input
               type="text"
+              name="slug"
               required
               value={formData.slug}
-              onChange={(e) =>
-                setFormData({ ...formData, slug: e.target.value })
-              }
+              onChange={handleChange}
               className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />
           </div>
@@ -105,10 +107,9 @@ export default function PostsNew() {
             Status
           </label>
           <select
+            name="status"
             value={formData.status}
-            onChange={(e) =>
-              setFormData({ ...formData, status: e.target.value })
-            }
+            onChange={handleChange}
             className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           >
             <option value="DRAFT">Draft</option>
@@ -146,8 +147,9 @@ export default function PostsNew() {
             Content (Markdown / HTML)
           </label>
           <textarea
+            name="content"
             value={formData.content}
-            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+            onChange={handleChange}
             className="w-full h-64 bg-black/20 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none font-mono"
             placeholder="Write your post content here..."
           />
