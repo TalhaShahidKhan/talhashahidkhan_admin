@@ -2,6 +2,10 @@ import { useState } from "react";
 import { fetchApi } from "../lib/api";
 import { Link } from "react-router";
 
+export function meta() {
+  return [{ title: "Blog Posts | Admin Panel" }];
+}
+
 export default function Posts() {
   const [posts, setPosts] = useState([]);
 

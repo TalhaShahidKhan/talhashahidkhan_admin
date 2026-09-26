@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { fetchApi } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Change Password | Admin Panel" }];
+}
+
 export default function PasswordChange() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

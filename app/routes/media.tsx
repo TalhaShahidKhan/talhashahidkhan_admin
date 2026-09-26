@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { uploadFile } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Media Library | Admin Panel" }];
+}
+
 export default function MediaLibrary() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");

@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { fetchApi, uploadFile } from "../lib/api";
 
+export function meta() {
+  return [{ title: "New Post | Admin Panel" }];
+}
+
 export default function PostsNew() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

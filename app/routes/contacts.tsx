@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Contacts | Admin Panel" }];
+}
+
 export default function Contacts() {
   const [messages, setMessages] = useState([]);
 

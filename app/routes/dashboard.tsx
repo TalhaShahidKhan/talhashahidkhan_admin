@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Dashboard | Admin Panel" }];
+}
+
 export default function Dashboard() {
   const [stats, setStats] = useState({
     pageVisits: 0,

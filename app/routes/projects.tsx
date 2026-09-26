@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { fetchApi } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Projects | Admin Panel" }];
+}
+
 export default function Projects() {
   const [projects, setProjects] = useState([]);
 

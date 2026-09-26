@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Service Requests | Admin Panel" }];
+}
+
 export default function ServiceRequests() {
   const [requests, setRequests] = useState([]);
 

@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { fetchApi } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Reset Password | Admin Panel" }];
+}
+
 export default function PasswordReset() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");

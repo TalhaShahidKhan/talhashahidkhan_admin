@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { fetchApi, setAuthToken } from "../lib/api";
 
+export function meta() {
+  return [{ title: "Login | Admin Panel" }];
+}
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
