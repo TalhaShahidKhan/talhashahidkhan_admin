@@ -14,6 +14,16 @@ export default function Posts() {
     fetchApi("/admin/posts").then(setPosts);
   }, []);
 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    try {
+      await fetchApi(`/admin/posts/${id}`, { method: "DELETE" });
+      setPosts((prev) => prev.filter((p: any) => p.id !== id));
+    } catch (err: any) {
+      alert("Failed to delete post: " + err.message);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -68,10 +78,13 @@ export default function Posts() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="text-blue-400 hover:text-blue-300 mr-3">
+                    <Link to={`/posts/${p.id}`} className="text-blue-400 hover:text-blue-300 mr-3">
                       Edit
-                    </button>
-                    <button className="text-red-400 hover:text-red-300">
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(p.id)}
+                      className="text-red-400 hover:text-red-300"
+                    >
                       Delete
                     </button>
                   </td>

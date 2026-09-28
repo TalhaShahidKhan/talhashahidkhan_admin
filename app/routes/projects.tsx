@@ -13,6 +13,16 @@ export default function Projects() {
     fetchApi("/admin/projects").then(setProjects).catch(console.error);
   }, []);
 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this project?")) return;
+    try {
+      await fetchApi(`/admin/projects/${id}`, { method: "DELETE" });
+      setProjects((prev) => prev.filter((p: any) => p.id !== id));
+    } catch (err: any) {
+      alert("Failed to delete project: " + err.message);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -63,10 +73,13 @@ export default function Projects() {
                     {new Date(p.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="text-blue-400 hover:text-blue-300 mr-3">
+                    <Link to={`/projects/${p.id}`} className="text-blue-400 hover:text-blue-300 mr-3">
                       Edit
-                    </button>
-                    <button className="text-red-400 hover:text-red-300">
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(p.id)}
+                      className="text-red-400 hover:text-red-300"
+                    >
                       Delete
                     </button>
                   </td>
