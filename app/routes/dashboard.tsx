@@ -24,7 +24,7 @@ export default function Dashboard() {
 
         let totalVisits = 0;
         if (Array.isArray(pagesRes)) {
-          totalVisits = pagesRes.reduce((sum, item) => sum + (item.visits || item._sum?.visitCount || 0), 0);
+          totalVisits = pagesRes.reduce((sum, item) => sum + (item.visitCount || item.visits || item._sum?.visitCount || 0), 0);
         }
 
         let totalViews = 0;
