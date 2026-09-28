@@ -54,10 +54,28 @@ export default function AdminLayout() {
             Blog Posts
           </Link>
           <Link
+            to="/services"
+            className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            Services
+          </Link>
+          <Link
+            to="/service-packages"
+            className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            Service Packages
+          </Link>
+          <Link
             to="/service-requests"
             className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
             Service Requests
+          </Link>
+          <Link
+            to="/service-package-requests"
+            className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            Package Requests
           </Link>
           <Link
             to="/contacts"

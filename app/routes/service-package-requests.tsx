@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
 
 export function meta() {
-  return [{ title: "Service Requests | Admin Panel" }];
+  return [{ title: "Service Package Requests | Admin Panel" }];
 }
 
-export default function ServiceRequests() {
+export default function ServicePackageRequests() {
   const [requests, setRequests] = useState<any[]>([]);
   const [selectedRequest, setSelectedRequest] = useState<any | null>(null);
   const [statusUpdating, setStatusUpdating] = useState(false);
@@ -15,13 +15,13 @@ export default function ServiceRequests() {
   }, []);
 
   const fetchRequests = () => {
-    fetchApi("/admin/service-requests").then(setRequests).catch(console.error);
+    fetchApi("/admin/service-package-requests").then(setRequests).catch(console.error);
   };
 
   const handleStatusUpdate = async (id: string, status: string) => {
     setStatusUpdating(true);
     try {
-      await fetchApi(`/admin/service-requests/${id}/status`, {
+      await fetchApi(`/admin/service-package-requests/${id}/status`, {
         method: "PATCH",
         body: JSON.stringify({ status }),
       });
@@ -37,8 +37,8 @@ export default function ServiceRequests() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold text-white tracking-tight">Service Requests</h2>
-        <p className="text-slate-400 mt-1">Track incoming service tickets.</p>
+        <h2 className="text-2xl font-semibold text-white tracking-tight">Service Package Requests</h2>
+        <p className="text-slate-400 mt-1">Track incoming requests for service packages.</p>
       </div>
 
       <div className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-md overflow-hidden">
@@ -47,6 +47,7 @@ export default function ServiceRequests() {
             <tr>
               <th className="px-6 py-4 font-medium text-slate-200">Client</th>
               <th className="px-6 py-4 font-medium text-slate-200">Email</th>
+              <th className="px-6 py-4 font-medium text-slate-200">Package</th>
               <th className="px-6 py-4 font-medium text-slate-200">Status</th>
               <th className="px-6 py-4 font-medium text-slate-200 text-right">Actions</th>
             </tr>
@@ -54,8 +55,8 @@ export default function ServiceRequests() {
           <tbody className="divide-y divide-white/5">
             {requests.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-slate-500">
-                  No service requests found.
+                <td colSpan={5} className="px-6 py-8 text-center text-slate-500">
+                  No service package requests found.
                 </td>
               </tr>
             ) : (
@@ -63,8 +64,9 @@ export default function ServiceRequests() {
                 <tr key={r.id} className="hover:bg-white/5 transition-colors">
                   <td className="px-6 py-4 font-medium text-white">{r.name}</td>
                   <td className="px-6 py-4">{r.email}</td>
+                  <td className="px-6 py-4">{r.package?.name}</td>
                   <td className="px-6 py-4">
-                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
                       {r.status}
                     </span>
                   </td>
@@ -92,7 +94,7 @@ export default function ServiceRequests() {
             >
               ✕
             </button>
-            <h3 className="text-xl font-semibold text-white mb-4">Review Service Request</h3>
+            <h3 className="text-xl font-semibold text-white mb-4">Review Package Request</h3>
             
             <div className="space-y-4 text-sm text-slate-300">
               <div>
@@ -105,8 +107,8 @@ export default function ServiceRequests() {
                 {selectedRequest.whatsapp && <p className="text-white">{selectedRequest.whatsapp}</p>}
               </div>
               <div>
-                <p className="font-medium text-slate-400 text-xs uppercase tracking-wider mb-1">Service</p>
-                <p className="text-white">{selectedRequest.service?.title || 'Unknown Service'}</p>
+                <p className="font-medium text-slate-400 text-xs uppercase tracking-wider mb-1">Package</p>
+                <p className="text-white">{selectedRequest.package?.name || 'Unknown Package'}</p>
               </div>
               <div>
                 <p className="font-medium text-slate-400 text-xs uppercase tracking-wider mb-1">Message</p>
@@ -136,7 +138,7 @@ export default function ServiceRequests() {
                     onClick={() => handleStatusUpdate(selectedRequest.id, status)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                       selectedRequest.status === status 
-                        ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' 
+                        ? 'bg-purple-500/20 text-purple-400 border-purple-500/30' 
                         : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'
                     }`}
                   >
