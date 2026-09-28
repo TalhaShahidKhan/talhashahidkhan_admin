@@ -12,7 +12,6 @@ export default [
     route("posts", "routes/posts.tsx"),
     route("posts/new", "routes/posts-new.tsx"),
     route("posts/:id", "routes/posts-edit.tsx"),
-    route("projects", "routes/projects.tsx"),
     route("projects/new", "routes/projects-new.tsx"),
     route("projects/:id", "routes/projects-edit.tsx"),
     route("experiences", "routes/experiences.tsx"),
