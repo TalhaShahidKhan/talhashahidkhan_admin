@@ -8,8 +8,12 @@ export function meta() {
 
 export default function ProjectsNew() {
   const navigate = useNavigate();
+
+  const generateSlug = (str: string) => str.toLowerCase().replace(/[\s_]+/g, '-').replace(/[^\w-]+/g, '');
+
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     description: "",
     liveLink: "",
     githubRepository: "",
@@ -25,7 +29,11 @@ export default function ProjectsNew() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "name") {
+      setFormData((prev) => ({ ...prev, [name]: value, slug: generateSlug(value) }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +103,17 @@ export default function ProjectsNew() {
             value={formData.name}
             onChange={handleChange}
             className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Slug</label>
+          <input
+            type="text"
+            name="slug"
+            readOnly
+            value={formData.slug}
+            className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white/50 focus:outline-none cursor-not-allowed"
           />
         </div>
 
