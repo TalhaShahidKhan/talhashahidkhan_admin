@@ -42,6 +42,12 @@ export default function AdminLayout() {
             Projects
           </Link>
           <Link
+            to="/experiences"
+            className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            Experiences
+          </Link>
+          <Link
             to="/posts"
             className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >

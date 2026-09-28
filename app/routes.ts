@@ -12,6 +12,9 @@ export default [
     route("posts", "routes/posts.tsx"),
     route("posts/new", "routes/posts-new.tsx"),
     route("projects/new", "routes/projects-new.tsx"),
+    route("experiences", "routes/experiences.tsx"),
+    route("experiences/new", "routes/experiences-new.tsx"),
+    route("experiences/:id", "routes/experiences-edit.tsx"),
     route("password-change", "routes/password-change.tsx"),
   ])
 ] satisfies RouteConfig;
