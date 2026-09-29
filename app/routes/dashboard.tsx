@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend } from "recharts";
-import { format, subDays } from "date-fns";
+import { format, addDays } from "date-fns";
 
 export function meta() {
   return [{ title: "Dashboard | Admin Panel" }];
@@ -20,9 +20,9 @@ export default function Dashboard() {
   const [timeSeriesPosts, setTimeSeriesPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Default to last 30 days
-  const [startDate, setStartDate] = useState<string>(format(subDays(new Date(), 30), "yyyy-MM-dd"));
-  const [endDate, setEndDate] = useState<string>(format(new Date(), "yyyy-MM-dd"));
+  // Default to today to tomorrow
+  const [startDate, setStartDate] = useState<string>(format(new Date(), "yyyy-MM-dd"));
+  const [endDate, setEndDate] = useState<string>(format(addDays(new Date(), 1), "yyyy-MM-dd"));
 
   useEffect(() => {
     async function loadAnalytics() {
